@@ -1,0 +1,147 @@
+//ejercicios:
+//1
+#include <iostream>
+using namespace std;
+		int main() {
+			string nombre;
+			//escribir "Ingrese su nombre: ";
+			cout << "Ingrese su nombre: ";
+			cin >> nombre;
+			cout << "hola nombre";
+		return 0;
+	}
+//2
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <limits>
+
+std::string HighAndLow(const std::string& numbers) {
+		std::stringstream ss(numbers);
+		int temp;
+		bool isEmpty = true;
+		int max, min;
+
+		while (ss >> temp) {
+				if (isEmpty) {
+						max = temp;
+						min = temp;
+						isEmpty = false;
+				} else {
+						max = (temp > max) ? temp : max;
+						min = (temp < min) ? temp : min;
+				}
+		}
+
+		if (isEmpty) {
+				return "La lista está vacía";
+		} else {
+				return std::to_string(max) + " " + std::to_string(min);
+		}
+}
+
+int main() {
+		std::cout << "Ingrese una lista de números separados por paréntesis (por ejemplo: (1 2 3) (4 5 6)): ";
+		std::string input;
+		std::getline(std::cin, input); // Lee la entrada del usuario
+
+		std::stringstream list_ss(input);
+		std::string sublist;
+		while (std::getline(list_ss, sublist, ')')) {
+				size_t pos = sublist.find_first_of('(');
+				if (pos != std::string::npos) {
+						std::string sublist_numbers = sublist.substr(pos + 1); // Elimina el primer paréntesis
+						std::string result = HighAndLow(sublist_numbers);
+						if (result == "La lista está vacía") {
+								std::cout << "El conjunto " << sublist << " está vacío." << std::endl;
+						} else {
+								std::cout << "El número más alto y el más bajo del conjunto " << sublist << " son: " << result << std::endl;
+						}
+				}
+		}
+
+		return 0;
+}
+
+//3
+#include <iostream>
+#include <vector>
+
+int main() {
+		std::vector<int> numeros;
+		int cantidad_numeros;
+
+		std::cout << "¿Cuántos números deseas ingresar? ";
+		std::cin >> cantidad_numeros;
+
+		
+		for (int i = 0; i < cantidad_numeros; ++i) {
+				int numero;
+				std::cout << "Ingresa el número " << i + 1 << ": ";
+				std::cin >> numero;
+				numeros.push_back(numero);
+		}
+
+		
+		int suma_total = 0;
+		for (int num : numeros) {
+				suma_total += num;
+		}
+
+		std::cout << "La suma total de los datos ingresados es: " << suma_total << std::endl;
+
+		return 0;
+}
+
+//4
+#include <iostream>
+#include <string>
+
+std::string maskify(const std::string& input) {
+		if (input.length() <= 4) {
+				return input;
+		}
+
+		
+		std::string masked = input;
+		for (size_t i = 0; i < input.length() - 4; ++i) {
+				masked[i] = '#';
+		}
+
+		return masked;
+}
+int main() {
+		std::string secret;
+		std::cout << "Numero de targeta de credito: ";
+		std::cin >> secret;
+
+		std::string masked_secret = maskify(secret);
+		std::cout << "Numero de targeta de credito: " << masked_secret << std::endl;
+
+		return 0;
+}
+
+//5
+#include <iostream>
+#include <cmath> 
+
+int main() {
+		int numero;
+		std::cout << "Ingresa un número: ";
+		std::cin >> numero; 
+
+		int resultado = 0; 
+
+		while (numero > 0) {
+				int digito = numero % 10; 
+				int digito_al_cuadrado = pow(digito, 2); 
+
+				resultado = resultado * 100 + digito_al_cuadrado; 
+
+				numero /= 10; 
+		}
+
+		std::cout << "El resultado es: " << resultado << std::endl;
+
+		return 0;
+}
